@@ -42,6 +42,22 @@ public final class DatabaseConstants {
     }
 
     @NoArgsConstructor(access = PRIVATE)
+    public static final class TrainingPlans {
+        public static final String TABLE_NAME = "exercise_types";
+        public static final String COLUMN_ID = "id";
+        public static final String COLUMN_NAME = "name";
+        public static final String COLUMN_DESCRIPTION = "description";
+    }
+
+    @NoArgsConstructor(access = PRIVATE)
+    public static final class TrainingPlanExercises {
+        public static final String TABLE_NAME = "training_plan_exercises";
+        public static final String JOIN_COLUMN_EXERCISE = "exercise_id";
+        public static final String JOIN_COLUMN_TRAINING_PLAN = "training_plan_id";
+        public static final String COLUMN_ORDER = "order";
+    }
+
+    @NoArgsConstructor(access = PRIVATE)
     public static class Users {
         public static final String TABLE_NAME = "users";
         public static final String COLUMN_ID = "id";
