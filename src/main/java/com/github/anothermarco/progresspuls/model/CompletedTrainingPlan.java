@@ -10,8 +10,9 @@ import org.hibernate.proxy.HibernateProxy;
 
 import java.time.LocalDate;
 import java.time.LocalTime;
-import java.util.List;
+import java.util.LinkedHashSet;
 import java.util.Objects;
+import java.util.Set;
 
 @Getter
 @Setter
@@ -35,13 +36,13 @@ public class CompletedTrainingPlan {
     @Column(name = CompletedTrainingPlans.COLUMN_TIME)
     private LocalTime time;
 
-    @OneToMany(mappedBy = "completedTrainingPlan", cascade = CascadeType.ALL)
-    private List<CompletedExercise> completedExercises;
 
     @ManyToOne
     @JoinColumn(name = CompletedTrainingPlans.JOIN_COLUMN_USER, referencedColumnName = Users.COLUMN_ID)
     private User user;
 
+    @OneToMany(mappedBy = "completedTrainingPlan", orphanRemoval = true)
+    private Set<CompletedSet> completedSets = new LinkedHashSet<>();
 
     @Override
     public final boolean equals(Object o) {

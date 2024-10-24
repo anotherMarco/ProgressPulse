@@ -27,6 +27,7 @@ public final class DatabaseConstants {
         public static final String TABLE_NAME = "completed_sets";
         public static final String COLUMN_ID = "id";
         public static final String JOIN_COLUMN_COMPLETED_EXERCISE = "completed_exercise_id";
+        public static final String JOIN_COLUMN_COMPLETED_TRAINING_PLAN = "completed_training_plan_id";
         public static final String COLUMN_SET_NUMBER = "set_number";
         public static final String COLUMN_REPETITIONS = "repetitions";
         public static final String COLUMN_WEIGHT = "weight";
@@ -63,6 +64,22 @@ public final class DatabaseConstants {
     }
 
     @NoArgsConstructor(access = PRIVATE)
+    public static final class ExerciseTypes {
+        public static final String TABLE_NAME = "exercise_types";
+        public static final String COLUMN_ID = "id";
+        public static final String COLUMN_NAME = "name";
+    }
+
+    @NoArgsConstructor(access = PRIVATE)
+    public static final class Roles {
+        public static final String TABLE_NAME = "roles";
+        public static final String COLUMN_ID = "id";
+        public static final String COLUMN_NAME = "name";
+        public static final String JOIN_TABLE_ROLES_PERMISSIONS = "roles_permissions";
+        public static final String JOIN_COLUM_ROLE = "role_id";
+    }
+
+    @NoArgsConstructor(access = PRIVATE)
     public static final class SetDetails {
         public static final String TABLE_NAME = "set_details";
         public static final String COLUMN_ID = "id";
@@ -73,12 +90,6 @@ public final class DatabaseConstants {
         public static final String JOIN_COLUMN_TRAINING_PLAN_EXERCISE = "training_plan_exercise_id";
     }
 
-    @NoArgsConstructor(access = PRIVATE)
-    public static final class ExerciseTypes {
-        public static final String TABLE_NAME = "exercise_types";
-        public static final String COLUMN_ID = "id";
-        public static final String COLUMN_NAME = "name";
-    }
 
     @NoArgsConstructor(access = PRIVATE)
     public static final class TrainingPlans {
@@ -104,5 +115,6 @@ public final class DatabaseConstants {
         public static final String COLUMN_USER_NAME = "user_name";
         public static final String COLUMN_EMAIL = "email";
         public static final String COLUMN_PASSWORD = "password";
+        public static final String JOIN_COLUMN_ROLE = "role_id";
     }
 }

@@ -1,0 +1,13 @@
+spring:
+  application:
+    name: ProgressPulse
+  jpa:
+    hibernate:
+      ddl-auto: update
+server:
+  port: 8081
+progress-pulse:
+  security:
+    jwt:
+      secret-key: 3413249017345912437
+
