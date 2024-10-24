@@ -27,7 +27,6 @@ public class JwtAuthFilter extends OncePerRequestFilter {
 
     @Override
     protected void doFilterInternal(HttpServletRequest request, @NonNull HttpServletResponse response, @NonNull FilterChain filterChain) throws ServletException, IOException {
-        // Retrieve the Authorization header
         String authHeader = request.getHeader("Authorization");
         String token = null;
         String username = null;
@@ -37,7 +36,6 @@ public class JwtAuthFilter extends OncePerRequestFilter {
             username = jwtService.extractUsername(token); // Extract displayName from token
         }
 
-        // If the token is valid and no authentication is set in the context
         if (username != null && SecurityContextHolder.getContext().getAuthentication() == null) {
             UserDetails userDetails = userService.loadUserByUsername(username);
 

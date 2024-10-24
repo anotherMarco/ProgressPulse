@@ -31,11 +31,11 @@ public class SecurityConfig {
     @Bean
     public SecurityFilterChain securityFilterChain(HttpSecurity http) throws Exception {
         http
-                .csrf(AbstractHttpConfigurer::disable) // Disable CSRF for stateless APIs
+                .csrf(AbstractHttpConfigurer::disable)
                 .authorizeHttpRequests(auth -> auth
                         .requestMatchers("auth/login").permitAll()
-                        .requestMatchers(HttpMethod.POST, "/auth/users/").hasAuthority(Permission.USER_WRITE.name())
-                        .requestMatchers("/auth/admin/**").hasAuthority("ROLE_ADMIN")
+                        .requestMatchers(HttpMethod.POST, "/users").hasAuthority(Permission.USER_WRITE.name())
+                        .requestMatchers(HttpMethod.GET, "/users/**").hasAuthority(Permission.USER_READ.name())
                         .anyRequest().denyAll()
                 )
                 .sessionManagement(sess -> sess
