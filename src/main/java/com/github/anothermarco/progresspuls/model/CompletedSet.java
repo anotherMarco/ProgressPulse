@@ -38,6 +38,10 @@ public class CompletedSet {
     @Column(name = CompletedSets.COLUMN_REST_BETWEEN_SETS)
     private int restPeriodBetweenSets;
 
+    @ManyToOne
+    @JoinColumn(name = CompletedSets.JOIN_COLUMN_COMPLETED_TRAINING_PLAN)
+    private CompletedTrainingPlan completedTrainingPlan;
+
 
     @Override
     public final boolean equals(Object o) {
