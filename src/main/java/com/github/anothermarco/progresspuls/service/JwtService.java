@@ -1,4 +1,4 @@
-package com.github.anothermarco.progresspuls.config.security;
+package com.github.anothermarco.progresspuls.service;
 
 import io.jsonwebtoken.Claims;
 import io.jsonwebtoken.Jwts;
@@ -55,6 +55,7 @@ public class JwtService {
 
     private Claims extractAllClaims(String token) {
         return Jwts.parser()
+                .verifyWith(getSignKey())
                 .decryptWith(getSignKey())
                 .build()
                 .parseSignedClaims(token)

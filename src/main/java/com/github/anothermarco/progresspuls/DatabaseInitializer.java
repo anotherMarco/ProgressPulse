@@ -20,7 +20,6 @@ public class DatabaseInitializer implements CommandLineRunner {
     private final UserRepository userRepository;
     private final PasswordEncoder passwordEncoder;
 
-
     @Override
     public void run(String... args) {
         if (userRepository.findByEmail("admin@example.com").isEmpty()) {
@@ -33,7 +32,7 @@ public class DatabaseInitializer implements CommandLineRunner {
             user.setEmail("admin@example.com");
             user.setRole(role);
             user.setPassword(passwordEncoder.encode("admin"));
-            user.setUsername("admin");
+            user.setDisplayName("admin");
 
             userRepository.save(user);
         }

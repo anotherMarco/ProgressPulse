@@ -1,5 +1,6 @@
 package com.github.anothermarco.progresspuls.config.security;
 
+import com.github.anothermarco.progresspuls.service.JwtService;
 import com.github.anothermarco.progresspuls.service.UserService;
 import jakarta.servlet.FilterChain;
 import jakarta.servlet.ServletException;
@@ -33,7 +34,7 @@ public class JwtAuthFilter extends OncePerRequestFilter {
 
         if (authHeader != null && authHeader.startsWith("Bearer ")) {
             token = authHeader.substring(7); // Extract token
-            username = jwtService.extractUsername(token); // Extract username from token
+            username = jwtService.extractUsername(token); // Extract displayName from token
         }
 
         // If the token is valid and no authentication is set in the context

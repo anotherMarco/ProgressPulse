@@ -9,5 +9,4 @@ server:
 progress-pulse:
   security:
     jwt:
-      secret-key: 3413249017345912437
-
+      secret-key: 341324901734591243732145514234234523543t214654hgwywy5ywtgrt135yyhgyhsarghwgh

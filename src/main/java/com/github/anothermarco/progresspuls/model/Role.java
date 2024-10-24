@@ -25,7 +25,7 @@ public class Role {
     private String name;
 
     @Enumerated(EnumType.STRING)
-    @ElementCollection
+    @ElementCollection(fetch = FetchType.EAGER)
     @Column(name = "permission")
     @CollectionTable(name = Roles.JOIN_TABLE_ROLES_PERMISSIONS, joinColumns = @JoinColumn(name = Roles.JOIN_COLUM_ROLE))
     private Set<Permission> permissions = new LinkedHashSet<>();

@@ -4,6 +4,7 @@ import com.github.anothermarco.progresspuls.config.security.Permission;
 import com.github.anothermarco.progresspuls.constants.DatabaseConstants.Roles;
 import com.github.anothermarco.progresspuls.constants.DatabaseConstants.Users;
 import jakarta.persistence.*;
+import jakarta.transaction.Transactional;
 import lombok.Getter;
 import lombok.Setter;
 import org.hibernate.proxy.HibernateProxy;
@@ -28,8 +29,8 @@ public class User implements UserDetails {
 
     private AuditMetadata auditMetadata;
 
-    @Column(name = Users.COLUMN_USER_NAME, nullable = false, unique = true)
-    private String username;
+    @Column(name = Users.COLUMN_DISPLAY_NAME, nullable = false, unique = true)
+    private String displayName;
 
     @Column(name = Users.COLUMN_EMAIL, nullable = false, unique = true)
     private String email;
@@ -42,12 +43,20 @@ public class User implements UserDetails {
     private Role role;
 
     @Override
+    @Transactional
     public Collection<? extends GrantedAuthority> getAuthorities() {
         return role.getPermissions().stream()
                 .map(Permission::name)
                 .map(SimpleGrantedAuthority::new)
                 .toList();
     }
+
+    @Override
+    public String getUsername() {
+        return email;
+    }
+
+
 
 
     @Override
@@ -71,7 +80,7 @@ public class User implements UserDetails {
         return getClass().getSimpleName() + "(" +
                 "id = " + id + ", " +
                 "auditMetadata = " + auditMetadata + ", " +
-                "username = " + username + ", " +
+                "displayName = " + displayName + ", " +
                 "email = " + email + ")";
     }
 

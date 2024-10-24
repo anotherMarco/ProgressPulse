@@ -112,7 +112,7 @@ public final class DatabaseConstants {
     public static class Users {
         public static final String TABLE_NAME = "users";
         public static final String COLUMN_ID = "id";
-        public static final String COLUMN_USER_NAME = "user_name";
+        public static final String COLUMN_DISPLAY_NAME = "display_name";
         public static final String COLUMN_EMAIL = "email";
         public static final String COLUMN_PASSWORD = "password";
         public static final String JOIN_COLUMN_ROLE = "role_id";
