@@ -1,31 +1,35 @@
 package com.github.anothermarco.progresspuls.model;
 
-import com.github.anothermarco.progresspuls.constants.DatabaseConstants.ExerciseTypes;
+import com.github.anothermarco.progresspuls.constants.DatabaseConstants;
+import com.github.anothermarco.progresspuls.constants.DatabaseConstants.CompletedExercises;
 import jakarta.persistence.*;
 import lombok.Getter;
 import lombok.Setter;
 import org.hibernate.proxy.HibernateProxy;
 
+import java.util.List;
 import java.util.Objects;
-import java.util.Set;
 
 @Getter
 @Setter
 @Entity
-@Table(name = ExerciseTypes.TABLE_NAME)
-public class ExerciseType {
+@Table(name = CompletedExercises.TABLE_NAME)
+public class CompletedExercise {
+
     @Id
     @GeneratedValue(strategy = GenerationType.IDENTITY)
-    @Column(name = ExerciseTypes.COLUMN_ID, nullable = false)
+    @Column(name = CompletedExercises.COLUMN_ID, nullable = false)
     private Long id;
 
     private AuditMetadata auditMetadata;
 
-    @Column(name = ExerciseTypes.COLUMN_NAME, nullable = false, unique = true)
-    private String name;
+    @ManyToOne
+    @JoinColumn(name = CompletedExercises.JOIN_COLUMN_TRAINING_PLAN_EXERCISE,
+            referencedColumnName = DatabaseConstants.TrainingPlanExercises.COLUMN_ID)
+    private TrainingPlanExercise trainingPlanExercise;
 
-    @OneToMany(mappedBy = "type")
-    private Set<Exercise> exercises;
+    @OneToMany(mappedBy = "completedExercise", cascade = CascadeType.ALL)
+    private List<CompletedSet> completedSets;
 
 
     @Override
@@ -35,7 +39,7 @@ public class ExerciseType {
         Class<?> oEffectiveClass = o instanceof HibernateProxy ? ((HibernateProxy) o).getHibernateLazyInitializer().getPersistentClass() : o.getClass();
         Class<?> thisEffectiveClass = this instanceof HibernateProxy ? ((HibernateProxy) this).getHibernateLazyInitializer().getPersistentClass() : this.getClass();
         if (thisEffectiveClass != oEffectiveClass) return false;
-        ExerciseType that = (ExerciseType) o;
+        CompletedExercise that = (CompletedExercise) o;
         return getId() != null && Objects.equals(getId(), that.getId());
     }
 
@@ -46,9 +50,6 @@ public class ExerciseType {
 
     @Override
     public String toString() {
-        return getClass().getSimpleName() + "(" +
-                "id = " + id + ", " +
-                "auditMetadata = " + auditMetadata + ", " +
-                "name = " + name + ")";
+        return getClass().getSimpleName() + "(" + "id = " + id + ", " + "trainingPlanExercise = " + trainingPlanExercise + ")";
     }
 }

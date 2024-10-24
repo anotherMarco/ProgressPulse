@@ -17,7 +17,10 @@ public class TrainingPlanExercise {
 
     @Id
     @GeneratedValue(strategy = IDENTITY)
+    @Column(name = TrainingPlanExercises.COLUMN_ID, nullable = false)
     private Long id;
+
+    private AuditMetadata auditMetadata;
 
     @ManyToOne
     @JoinColumn(name = TrainingPlanExercises.JOIN_COLUMN_EXERCISE)
@@ -30,7 +33,7 @@ public class TrainingPlanExercise {
     @Column(name = TrainingPlanExercises.COLUMN_ORDER)
     private int order;
 
-    @OneToMany(cascade = CascadeType.ALL)
+    @OneToMany(mappedBy = "trainingPlanExercise", cascade = CascadeType.ALL)
     private List<SetDetail> sets;
 
     private int restPeriodAfterExercise;
@@ -46,5 +49,15 @@ public class TrainingPlanExercise {
     @Override
     public int hashCode() {
         return getClass().hashCode();
+    }
+
+    @Override
+    public String toString() {
+        return getClass().getSimpleName() + "(" +
+                "id = " + id + ", " +
+                "exercise = " + exercise + ", " +
+                "trainingPlan = " + trainingPlan + ", " +
+                "order = " + order + ", " +
+                "restPeriodAfterExercise = " + restPeriodAfterExercise + ")";
     }
 }

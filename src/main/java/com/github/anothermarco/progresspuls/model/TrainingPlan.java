@@ -23,6 +23,8 @@ public class TrainingPlan {
     @Column(name = TrainingPlans.COLUMN_ID)
     private Long id;
 
+    private AuditMetadata auditMetadata;
+
     @Column(name = TrainingPlans.COLUMN_NAME)
     private String name;
 

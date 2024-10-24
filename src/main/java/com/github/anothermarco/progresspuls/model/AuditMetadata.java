@@ -5,7 +5,6 @@ import jakarta.persistence.Column;
 import jakarta.persistence.Embeddable;
 import lombok.Getter;
 import lombok.Setter;
-import lombok.ToString;
 import org.springframework.data.annotation.CreatedBy;
 import org.springframework.data.annotation.CreatedDate;
 import org.springframework.data.annotation.LastModifiedBy;
@@ -15,7 +14,6 @@ import java.time.Instant;
 
 @Getter
 @Setter
-@ToString
 @Embeddable
 public class AuditMetadata {
 
@@ -34,4 +32,13 @@ public class AuditMetadata {
     @LastModifiedDate
     @Column(name = Audit.COLUMN_LAST_MODIFIED_DATE)
     private Instant lastModifiedDate;
+
+    @Override
+    public String toString() {
+        return getClass().getSimpleName() + "(" +
+                "createdBy = " + createdBy + ", " +
+                "lastModifiedBy = " + lastModifiedBy + ", " +
+                "createdDate = " + createdDate + ", " +
+                "lastModifiedDate = " + lastModifiedDate + ")";
+    }
 }

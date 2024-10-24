@@ -19,6 +19,8 @@ public class Equipment {
     @Column(name = Equipments.COLUMN_ID, nullable = false)
     private Long id;
 
+    private AuditMetadata auditMetadata;
+
     @Column(name = Equipments.COLUMN_NAME, nullable = false, unique = true)
     private String name;
 
